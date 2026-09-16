@@ -5,51 +5,119 @@ import io.ktor.server.application.ApplicationCall
 import io.ktor.server.request.receive
 import io.ktor.server.response.respond
 
+
 class ExpenseController(
     private val service: ExpenseService
+){
+
+
+    suspend fun getExpense(
+        call: ApplicationCall
     ){
 
+        val id =
+            call.parameters["id"]
+                ?.toIntOrNull()
+                ?: return call.respond(
+                    HttpStatusCode.BadRequest,
+                    "Invalid ID"
+                )
 
-    suspend fun getExpense(call: ApplicationCall) {
-        val id = call.parameters["id"]?.toIntOrNull()
-            ?: return call.respond(HttpStatusCode.BadRequest)
 
-        val expense = service.getExpense(id)
+        val expense =
+            service.getExpense(id)
 
-        call.respond(expense)
+
+        call.respond(
+            HttpStatusCode.OK,
+            expense
+        )
+
     }
 
 
 
-    suspend fun postExpense(call: ApplicationCall) {
-        val expense = call.receive<Expenses>()
+    suspend fun postExpense(
+        call: ApplicationCall
+    ){
 
-        val create = service.postExpense(expense)
+        val expense =
+            call.receive<Expenses>()
 
-        call.respond(create)
+
+        val result =
+            service.createExpense(expense)
+
+
+        call.respond(
+            HttpStatusCode.Created,
+            result
+        )
+
     }
 
-    suspend fun putExpense(call: ApplicationCall) {
-        val id = call.parameters["id"]?.toIntOrNull()
-            ?: return call.respond(HttpStatusCode.BadRequest)
-        val expense = call.receive<Expenses>()
 
-        val update = service.putExpense(id, expense)
-        call.respond(update)
+
+    suspend fun putExpense(
+        call: ApplicationCall
+    ){
+
+        val expense =
+            call.receive<Expenses>()
+
+
+        val result =
+            service.updateExpense(expense)
+
+
+        call.respond(
+            HttpStatusCode.OK,
+            result
+        )
+
     }
 
-    suspend fun deleteExpense(call: ApplicationCall) {
-        val id = call.parameters["id"]?.toIntOrNull()
-            ?: return call.respond(HttpStatusCode.BadRequest)
 
-        val expense = service.deleteExpense(id)
 
-        call.respond(expense)
+    suspend fun deleteExpense(
+        call: ApplicationCall
+    ){
+
+        val id =
+            call.parameters["id"]
+                ?.toIntOrNull()
+                ?: return call.respond(
+                    HttpStatusCode.BadRequest,
+                    "Invalid ID"
+                )
+
+
+        val result =
+            service.deleteExpense(id)
+
+
+        call.respond(
+            HttpStatusCode.OK,
+            result
+        )
+
     }
 
-    suspend fun getTotalExpense(call: ApplicationCall) {
-        val expense = service.getTotalExpenses()
 
-        call.respond(expense)
+
+    suspend fun getTotalExpense(
+        call: ApplicationCall
+    ){
+
+        val total =
+            service.getTotalExpense()
+
+
+        call.respond(
+            HttpStatusCode.OK,
+            total
+        )
+
     }
+
 }

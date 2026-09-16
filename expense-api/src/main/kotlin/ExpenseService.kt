@@ -1,48 +1,104 @@
 package org.example
 
 class ExpenseService(
-    private repo: ExpenseRepository
-  ){
+    private val repo: ExpenseRepository
+){
 
-    suspend fun getExpense(id: Int): Expenses{
-        if(id == null){
-            throw Exception("Expense id is null")
+
+    fun getExpense(id: Int): Expenses {
+
+        val expense =
+            repo.findById(id)
+
+
+        if(expense == null){
+            throw Exception("Expense not found")
         }
 
-        val expense = repo.findById(id)
+
+        return expense
     }
 
-    suspend fun createExpense(expense: Expenses): Expenses {
-        if (expense.quantity <= 0) throw Exception("Expense quantity is 0 or below")
 
 
-        if(expense.name == null) throw Exception("Expense name is null")
+    fun createExpense(expense: Expenses): Expenses {
 
-        if(expense.category == null) throw Exception("Expense category is null")
+
+        if(expense.name.isBlank()){
+            throw Exception(
+                "Expense name is empty"
+            )
+        }
+
+
+        if(expense.category.isBlank()){
+            throw Exception(
+                "Expense category is empty"
+            )
+        }
+
+
+        if(expense.quantity <= 0){
+            throw Exception(
+                "Expense quantity must be above 0"
+            )
+        }
+
 
         return repo.save(expense)
+
     }
 
-    suspend fun updateExpense(expense: Expenses): Expenses {
 
-        val result  = update(expense)
 
-        if(result == null) throw Exception("Expense is not found")
+    fun updateExpense(expense: Expenses): Expenses {
+
+
+        val result =
+            repo.update(expense)
+
+
+        if(result == null){
+            throw Exception(
+                "Expense not found"
+            )
+        }
+
 
         return result
+
     }
 
-    suspend fun deleteExpense(id: Int): Expenses {
-        val result = deleteById(id)
-        if(result == null) throw Exception("Expense is not found")
+
+
+    fun deleteExpense(id:Int): Expenses {
+
+
+        val result =
+            repo.deleteById(id)
+
+
+        if(result == null){
+            throw Exception(
+                "Expense not found"
+            )
+        }
+
 
         return result
-    }
 
-    suspend fun getTotalExpenses(): Int{
-        return repo.findAll.sumOf{it.quantity}
     }
 
 
+
+    fun getTotalExpense():Int {
+
+
+        return repo.findAll()
+            .sumOf {
+                it.quantity
+            }
+
+    }
 
 }
