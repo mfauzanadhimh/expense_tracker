@@ -1,9 +1,11 @@
-package org.example
+package org.example.controller
 
 import io.ktor.http.HttpStatusCode
 import io.ktor.server.application.ApplicationCall
 import io.ktor.server.request.receive
 import io.ktor.server.response.respond
+import org.example.service.ExpenseService
+import org.example.model.Expenses
 
 
 class ExpenseController(

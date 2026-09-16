@@ -1,4 +1,6 @@
-package org.example
+package org.example.repository
+
+import org.example.model.Expenses
 
 class ExpenseRepository {
 

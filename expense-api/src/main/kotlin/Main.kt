@@ -1,22 +1,20 @@
 package org.example
 
-import io.ktor.http.ContentType
-import io.ktor.http.HttpStatusCode
 import io.ktor.server.engine.*
 import io.ktor.server.netty.*
 import io.ktor.server.application.*
-import io.ktor.server.request.receiveText
 import io.ktor.server.routing.*
-import io.ktor.server.response.*
 import io.ktor.server.plugins.contentnegotiation.*
 import io.ktor.serialization.kotlinx.json.*
-import io.ktor.server.request.receive
-
-val repo = ExpenseRepository()
-val service = ExpenseService(repo)
+import org.example.controller.ExpenseController
+import org.example.database.DatabaseFactory
+import org.example.repository.ExpenseRepository
+import org.example.service.ExpenseService
 //TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 fun main() {
+    DatabaseFactory.init()
+
     val repository = ExpenseRepository()
 
     val service = ExpenseService(repository)

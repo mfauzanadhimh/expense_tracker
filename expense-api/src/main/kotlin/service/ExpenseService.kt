@@ -1,4 +1,7 @@
-package org.example
+package org.example.service
+
+import org.example.model.Expenses
+import org.example.repository.ExpenseRepository
 
 class ExpenseService(
     private val repo: ExpenseRepository
