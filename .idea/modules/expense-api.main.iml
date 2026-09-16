@@ -33,7 +33,7 @@
       </configuration>
     </facet>
   </component>
-  <component name="NewModuleRootManager">
+  <component name="NewModuleRootManager" LANGUAGE_LEVEL="JDK_26">
     <output url="file://$MODULE_DIR$/../../expense-api/build/classes/kotlin/main" />
     <exclude-output />
     <content url="file://$MODULE_DIR$/../../expense-api/src/main">
@@ -45,6 +45,9 @@
     <orderEntry type="library" name="Gradle: org.jetbrains.kotlin:kotlin-stdlib:2.4.10" level="project" />
     <orderEntry type="library" name="Gradle: io.ktor:ktor-server-core-jvm:3.3.1" level="project" />
     <orderEntry type="library" name="Gradle: io.ktor:ktor-server-netty-jvm:3.3.1" level="project" />
+    <orderEntry type="library" name="Gradle: org.postgresql:postgresql:42.7.4" level="project" />
+    <orderEntry type="library" name="Gradle: org.jetbrains.exposed:exposed-core:0.53.0" level="project" />
+    <orderEntry type="library" name="Gradle: org.jetbrains.exposed:exposed-jdbc:0.53.0" level="project" />
     <orderEntry type="library" name="Gradle: org.jetbrains:annotations:23.0.0" level="project" />
     <orderEntry type="library" name="Gradle: org.slf4j:slf4j-api:2.0.17" level="project" />
     <orderEntry type="library" name="Gradle: com.typesafe:config:1.4.4" level="project" />
@@ -82,5 +85,6 @@
     <orderEntry type="library" name="Gradle: org.jetbrains.kotlinx:kotlinx-io-core-jvm:0.8.0" level="project" />
     <orderEntry type="library" name="Gradle: org.jetbrains.kotlinx:kotlinx-io-bytestring-jvm:0.8.0" level="project" />
     <orderEntry type="library" scope="RUNTIME" name="Gradle: org.fusesource.jansi:jansi:2.4.2" level="project" />
+    <orderEntry type="library" scope="RUNTIME" name="Gradle: org.checkerframework:checker-qual:3.42.0" level="project" />
   </component>
 </module>
